@@ -6,7 +6,7 @@ class Solution:
             while l < r and not self.alphaNum(s[l]):
                 l += 1
             # We use while loop here to increment the pointer incase
-            # we encounter consecutive non-alphanumeric characters in the string
+            # we encounter consecutive non-alphanumeric characters in the string.
             while l < r and not self.alphaNum(s[r]):
                 r -= 1
             if s[l] != s[r]:
