@@ -47,3 +47,6 @@ ll.insert_at_begining(12)
 ll.print()
 # ll.insert_at_begining(15)
 ll.rever()
+
+
+# https://leetcode.com/problems/reverse-linked-list/
