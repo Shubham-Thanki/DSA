@@ -29,17 +29,18 @@ class Solution:
 
 # class Solution:
 #     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-#         ans=0
-#         def dfs(root):
-#             nonlocal ans
+#         diameter=0
+#         def dfs(root):  This Function returns the max height
+#             nonlocal diameter
 #             if not root:
 #                 return 0
 
 #             left=dfs(root.left)
 #             right=dfs(root.right)
-#             ans=max(ans,left+right)
+#             diameter=max(diameter,left+right) <--- Checking for the larger diameter while calculating the max height
+#                                                    so that we have to visit each node only once.
 
-#             return 1+max(left,right)
+#             return 1+max(left,right) <---- This is the max height
 
 #         dfs(root)
-#         return ans
+#         return diameter
