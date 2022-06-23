@@ -56,6 +56,17 @@ class BinarySearchTreeNode:
 
         return elements
 
+    def post_order_traversal(self):
+        elements = []
+        if self.left:
+            elements += self.left.post_order_traversal()
+        if self.right:
+            elements += self.right.post_order_traversal()
+
+        elements.append(self.data)
+
+        return elements
+
 
 def build_tree(elements):
     root = BinarySearchTreeNode(elements[0])
@@ -67,7 +78,10 @@ def build_tree(elements):
 
 
 if __name__ == '__main__':
-    num = [12, 56, 1, 68, 54, 23, 38]
+    # num = [12, 56, 1, 68, 54, 23, 38]
+    num = [8, 3, 4, 6, 7, 1, 10, 13, 14]
     num_tree = build_tree(num)
-    # print(num_tree, 'oko')
-    print(num_tree.pre_order_traversal())
+
+    print("PRE == ", num_tree.pre_order_traversal())
+    print("IN == ", num_tree.in_order_traversal())
+    print("POST == ", num_tree.post_order_traversal())
