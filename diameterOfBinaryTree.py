@@ -25,7 +25,7 @@ class Solution:
 
 # https://leetcode.com/problems/diameter-of-binary-tree/
 
-# Too further reduce the time complexity to O(n)
+# To further reduce the time complexity to O(n)
 
 # class Solution:
 #     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
