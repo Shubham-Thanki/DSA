@@ -31,7 +31,8 @@ class Solution:
 #     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
 #         diameter=0
 #         def dfs(root):  This Function returns the max height
-#             nonlocal diameter
+#             nonlocal diameter  --> nonlocal keyword is used to work with variables inside nested functions. It declares
+#.                                    the variable to be not local.
 #             if not root:
 #                 return 0
 
