@@ -6,6 +6,8 @@
 
 # @lc code=start
 import heapq
+# We create a minheap of size k, so that the 3rd largest element is always the minimum in
+# a minheap of size 3.
 
 
 class KthLargest:
