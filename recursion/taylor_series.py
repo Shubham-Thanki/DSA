@@ -1,7 +1,7 @@
 class Solution:
-    p = 1
-    f = 1
-    r = 0
+    p = 1  # Power
+    f = 1  # Factorial
+    r = 0  # Result
 
     def taylor(self, x, n):
         if n > 0:
