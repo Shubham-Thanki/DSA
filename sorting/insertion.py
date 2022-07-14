@@ -1,6 +1,3 @@
-from re import I
-
-
 arr = [12, 45, 23, 51, 8]
 n = 5
 for i in range(1, n):
