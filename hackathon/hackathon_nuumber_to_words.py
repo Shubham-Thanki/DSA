@@ -74,12 +74,13 @@ def international(num):
             if numlist[i+1] == '1':
                 digit = digit+numlist[i+1]+numlist[i+2]
                 ans = ans+tenzdict[digit]+' '
-                flag = False
             else:
-                ans = ans+tenzdict[numlist[i+1]]+' '
+                ans = ans+tenzdict[numlist[i+1]]+' '+unitdict[numlist[i+2]]+' '
+        else:
+            ans = ans+unitdict[numlist[i+2]]
 
-        if numlist[i+2] != '0' and flag:
-            ans = ans+unitdict[numlist[i+2]]+' '
+        # if numlist[i+2] != '0' and flag:
+        #     ans = ans+]+' '
 
         checksum = int(numlist[i])+int(numlist[i+1])+int(numlist[i+2])
 
