@@ -1,101 +1,101 @@
+class Solution:
 
+    def __init__(self, num, numsys) -> None:
+        self.numlist = []
+        self.numlist[:0] = num
+        zeroadd = 7-len(self.numlist)
+        for i in range(0, zeroadd):
+            self.numlist.insert(0, '0')
 
-def indian(num):
+        if numsys == '1':
+            self.indian()
+        else:
+            self.international()
+
     unitdict = {"1": "ONE", "2": "TWO", "3": "THREE", "4": "FOUR",
                 "5": "FIVE", "6": "SIX", "7": "SEVEN", "8": "EIGHT", "9": "NINE", "0": ""}
+
     tenzdict = {"10": "TEN", "11": "ELEVEN", "12": "TWELVE", "13": "THIRTEEN", "14": "FOURTEEN", "15": "FIFTEEN", "16": "SIXTEEN", "17": "SEVENTEEN",
                 "18": "EIGHTEEN", "19": "NINETEEN", "2": "TWENTY", "3": "THIRTY", "4": "FORTY", "5": "FIFTY", "6": "SIXTY", "7": "SEVENTY", "8": "EIGHTY", "9": "NINETY"}
-    suffix = ["LAKH", "THOUSAND", "HUNDRED"]
-    suff = 0
-    ans = ""
-    numlist = []
-    numlist[:0] = num
-    zeroadd = 7-len(numlist)
-    for i in range(0, zeroadd):
-        numlist.insert(0, '0')
-    # print(numlist)
 
-    digit = ''
-    for i in [0, 2]:
-        if numlist[i] != '0':  # The number has a digit at this place
-            if numlist[i] == '1':  # If the first digit is 1
-                # Merging the 2 digits to get a suitable value from the keys available in tenzdict.
-                digit = digit+numlist[i]+numlist[i+1]
-                ans = ans+tenzdict[digit]+' '
-            else:
-                ans = ans+tenzdict[numlist[i]]+' ' + unitdict[numlist[i+1]]+' '
-            ans = ans+suffix[suff]+' '
+    def indian(self):
+        suffix = ["LAKH", "THOUSAND"]
+        suff = 0
+        list1 = self.numlist[0:2]
+        list2 = self.numlist[2:4]
+        list3 = self.numlist[4:7]
+        ans = ''
 
-        elif numlist[i+1] != '0':
-            ans = ans+unitdict[numlist[i+1]]+' '
-            ans = ans+suffix[suff]+' '
-
+        if int(list1[0])+int(list1[1]) > 0:
+            ans = ans + self.two_digits(list1)+' '+suffix[suff]+' '
         suff += 1
-    flag = True
-    digit = ''
-    if numlist[4] != '0':
-        ans = ans+unitdict[numlist[4]]+' '+suffix[suff]+' '
-    if numlist[5] != '0':
-        if numlist[5] == '1':
-            digit = digit+numlist[5]+numlist[6]
-            ans = ans+tenzdict[digit]+' '
-            flag = False
-        else:
-            ans = ans+tenzdict[numlist[5]]+' '
-    if numlist[6] != '0' and flag:
-        ans = ans+unitdict[numlist[6]]
 
-    ans = ans.split("  ")
-    for i in ans:
-        print(i, end=' ')
+        if int(list2[0])+int(list2[1]) > 0:
+            ans = ans + self.two_digits(list2)+' '+suffix[suff]+' '
 
+        if int(list3[0])+int(list3[1])+int(list3[2]) > 0:
+            ans = ans + self.three_digits(list3)
 
-def international(num):
-    unitdict = {"1": "ONE", "2": "TWO", "3": "THREE", "4": "FOUR",
-                "5": "FIVE", "6": "SIX", "7": "SEVEN", "8": "EIGHT", "9": "NINE", "0": ""}
-    tenzdict = {"10": "TEN", "11": "ELEVEN", "12": "TWELVE", "13": "THIRTEEN", "14": "FOURTEEN", "15": "FIFTEEN", "16": "SIXTEEN", "17": "SEVENTEEN",
-                "18": "EIGHTEEN", "19": "NINETEEN", "2": "TWENTY", "3": "THIRTY", "4": "FORTY", "5": "FIFTY", "6": "SIXTY", "7": "SEVENTY", "8": "EIGHTY", "9": "NINETY"}
+        print(ans)
 
-    ans = ""
-    numlist = []
-    numlist[:0] = num
-    zeroadd = 7-len(numlist)
-    for i in range(0, zeroadd):
-        numlist.insert(0, '0')
-    if numlist[0] != '0':
-        ans = ans+unitdict[numlist[0]]+' '+'MILLION '
+    def international(self):
+        suffix = ["MILLION", "THOUSAND"]
+        suff = 0
+        list1 = self.numlist[0]
+        list2 = self.numlist[1:4]
+        list3 = self.numlist[4:7]
+        ans = ''
 
-    digit = ''
-    flag = True
-    for i in [1, 4]:
-        if numlist[i] != '0':
-            ans = ans+unitdict[numlist[i]]+' '+'HUNDRED '
-        if numlist[i+1] != '0':
-            if numlist[i+1] == '1':
-                digit = digit+numlist[i+1]+numlist[i+2]
-                ans = ans+tenzdict[digit]+' '
+        if int(list1[0]) > 0:
+            ans = ans+self.unitdict[list1[0]]+' '+suffix[suff]+' '
+        suff += 1
+
+        if int(list2[0])+int(list2[1])+int(list2[2]) > 0:
+            ans = ans+self.three_digits(list2)+' '+suffix[suff]+' '
+
+        if int(list3[0])+int(list3[1])+int(list3[2]) > 0:
+            ans = ans+self.three_digits(list3)
+
+        print(ans)
+
+    def three_digits(self, three_digits):
+        ans3 = ''
+        digit = ''
+        if three_digits[0] != '0':
+            ans3 = ans3+self.unitdict[three_digits[0]]+' '+'HUNDRED'+' '
+        if three_digits[1] != '0':
+            if three_digits[1] == '1':
+                digit = three_digits[1]+three_digits[2]
+                ans3 = ans3+self.tenzdict[digit]
             else:
-                ans = ans+tenzdict[numlist[i+1]]+' '+unitdict[numlist[i+2]]+' '
+                ans3 = ans3+self.tenzdict[three_digits[1]] + \
+                    ' '+self.unitdict[three_digits[2]]
         else:
-            ans = ans+unitdict[numlist[i+2]]
+            ans3 = ans3+self.unitdict[three_digits[2]]
 
-        # if numlist[i+2] != '0' and flag:
-        #     ans = ans+]+' '
+        if ans3[-1] == ' ':
+            # This is to handle specific cases where strings like 100, 200, 300 , 400, etc. end with 'HUNDRED '.
+            # So this condition helps to eliminate the redundant space.
+            ans3 = ans3[0:len(ans3)-1]
+        return ans3
 
-        checksum = int(numlist[i])+int(numlist[i+1])+int(numlist[i+2])
+    def two_digits(self, two_digits):
+        ans2 = ''
+        digit = ''
+        if two_digits[0] != '0':
+            if two_digits[0] == '1':
+                digit = two_digits[0]+two_digits[1]
+                ans2 = ans2+self.tenzdict[digit]
+            else:
+                ans2 = ans2+self.tenzdict[two_digits[0]
+                                          ]+' '+self.unitdict[two_digits[1]]
+        else:
+            ans2 = ans2+self.unitdict[two_digits[1]]
 
-        if i == 1 and checksum > 0:
-            ans = ans+'THOUSAND '
-
-    ans = ans.split("  ")
-    for i in ans:
-        print(i, end=' ')
+        return ans2
 
 
 if __name__ == '__main__':
     choose = input()
     num = input()
-    if choose == '1':
-        indian(num)
-    else:
-        international(num)
+    k = Solution(num, choose)
